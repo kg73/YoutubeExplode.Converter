@@ -3,16 +3,17 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
     <Version>1.4</Version>
+    <PackageId>kg73.YoutubeExplode.Converter</PackageId>
     <Company>Tyrrrz</Company>
     <Authors>$(Company)</Authors>
     <Copyright>Copyright (C) 2018 Alexey Golub</Copyright>
     <Description>Package for YoutubeExplode that uses FFmpeg to easily mux or convert downloaded videos</Description>
     <PackageTags>youtube video download convert net core standard</PackageTags>
-    <PackageProjectUrl>https://github.com/Tyrrrz/YoutubeExplode.Converter</PackageProjectUrl>
-    <PackageReleaseNotes>https://github.com/Tyrrrz/YoutubeExplode.Converter/blob/master/Changelog.md</PackageReleaseNotes>
-    <PackageLicenseUrl>https://github.com/Tyrrrz/YoutubeExplode.Converter/blob/master/License.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/kg73/YoutubeExplode.Converter</PackageProjectUrl>
+    <PackageReleaseNotes>https://github.com/kg73/YoutubeExplode.Converter/blob/master/Changelog.md</PackageReleaseNotes>
+    <PackageLicenseUrl>https://github.com/kg73/YoutubeExplode.Converter/blob/master/License.txt</PackageLicenseUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/Tyrrrz/YoutubeExplode.Converter/master/favicon.png</PackageIconUrl>
-    <RepositoryUrl>https://github.com/Tyrrrz/YoutubeExplode.Converter</RepositoryUrl>
+    <RepositoryUrl>https://github.com/kg73/YoutubeExplode.Converter</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>

@@ -10,14 +10,14 @@ build:
   verbosity: minimal
 
 artifacts:
-- path: YoutubeExplode.Converter\bin\$(configuration)\YoutubeExplode.Converter*.nupkg
-  name: YoutubeExplode.Converter.nupkg
+- path: YoutubeExplode.Converter\bin\$(configuration)\kg73.YoutubeExplode.Converter*.nupkg
+  name: kg73.YoutubeExplode.Converter.nupkg
 
 deploy:
 - provider: NuGet
   api_key:
-    secure: QuL5btMfw2HUtOrAO0C8hw0ILWLAY9Tq4Gp1uuDiPCjkOt7H8glITwlPCxoB/WWA
-  artifact: YoutubeExplode.Converter.nupkg
+    secure: suIJfeF0JeEpv9lqJTOjIJz099wWX7SC5fvCYyoFLz2Y1uwyLKQEAJ4bsyjGnJQe
+  artifact: kg73.YoutubeExplode.Converter.nupkg
   on:
-    branch: master
+    branch: custom-build
     appveyor_repo_tag: true
