@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2042
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YoutubeExplode.Converter", "YoutubeExplode.Converter\YoutubeExplode.Converter.csproj", "{0EDF5B2B-5BED-45EF-989E-D8B26FF36CF8}"
 EndProject
@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YoutubeExplode.Converter.Te
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DA673037-4636-460C-9CE9-B3F5314EF557}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\CD.yml = .github\workflows\CD.yml
 		Changelog.md = Changelog.md
+		.github\workflows\CI.yml = .github\workflows\CI.yml
 		License.txt = License.txt
 		ReadMe.md = ReadMe.md
 	EndProjectSection
