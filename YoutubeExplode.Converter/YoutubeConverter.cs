@@ -60,10 +60,6 @@ namespace YoutubeExplode.Converter
 			IProgress<double>? progress = null,
 			CancellationToken cancellationToken = default)
 		{
-			mediaStreamInfos.GuardNotNull(nameof(mediaStreamInfos));
-			filePath.GuardNotNull(nameof(filePath));
-			format.GuardNotNull(nameof(format));
-
 			// Determine if transcoding is required for at least one of the streams
 			var transcode = mediaStreamInfos.Any(s => IsTranscodingRequired(s.Container, format));
 
@@ -130,12 +126,11 @@ namespace YoutubeExplode.Converter
 			IProgress<double>? progress = null,
 			CancellationToken cancellationToken = default)
 		{
-			mediaStreamInfoSet.GuardNotNull(nameof(mediaStreamInfoSet));
-			filePath.GuardNotNull(nameof(filePath));
-			format.GuardNotNull(nameof(format));
+			// Select best media stream infos based on output format
+			var mediaStreamInfos = GetBestMediaStreamInfos(mediaStreamInfoSet, format).ToArray();
 
-            // Download media streams and process them
-            await DownloadAndProcessMediaStreamsAsync(mediaStreamInfos, filePath, format, progress, cancellationToken);
+			// Download media streams and process them
+			await DownloadAndProcessMediaStreamsAsync(mediaStreamInfos, filePath, format, startTs, takeTs, progress, cancellationToken);
         }
 
 		/// <inheritdoc />
@@ -144,10 +139,6 @@ namespace YoutubeExplode.Converter
 			IProgress<double>? progress = null,
 			CancellationToken cancellationToken = default)
 		{
-			videoId.GuardNotNull(nameof(videoId));
-			filePath.GuardNotNull(nameof(filePath));
-			format.GuardNotNull(nameof(format));
-
 			// Get stream info set
 			var mediaStreamInfoSet = await _youtubeClient.GetVideoMediaStreamInfosAsync(videoId)
 				.ConfigureAwait(false);
@@ -162,9 +153,6 @@ namespace YoutubeExplode.Converter
 			IProgress<double>? progress = null,
 			CancellationToken cancellationToken = default)
 		{
-			videoId.GuardNotNull(nameof(videoId));
-			filePath.GuardNotNull(nameof(filePath));
-
 			// Determine output file format from extension
 			var format = Path.GetExtension(filePath)?.TrimStart('.');
 
