@@ -1,37 +1,25 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace YoutubeExplode.Converter.Internal
 {
     internal static class Extensions
     {
-        public static bool IsBlank(this string str)
-        {
-            return string.IsNullOrWhiteSpace(str);
-        }
+        public static string JoinToString<T>(this IEnumerable<T> source, string separator) =>
+            string.Join(separator, source);
 
-        public static bool IsNotBlank(this string str)
+        public static T Clamp<T>(this T value, T min, T max) where T : IComparable<T>
         {
-            return !string.IsNullOrWhiteSpace(str);
-        }
+            // If value is less than min - return min
+            if (value.CompareTo(min) <= 0)
+                return min;
 
-        public static string SubstringUntil(this string str, string sub,
-            StringComparison comparison = StringComparison.Ordinal)
-        {
-            var index = str.IndexOf(sub, comparison);
-            return index < 0 ? str : str.Substring(0, index);
-        }
+            // If value is greater than max - return max
+            if (value.CompareTo(max) >= 0)
+                return max;
 
-        public static string SubstringAfter(this string str, string sub,
-            StringComparison comparison = StringComparison.Ordinal)
-        {
-            var index = str.IndexOf(sub, comparison);
-            return index < 0 ? string.Empty : str.Substring(index + sub.Length, str.Length - index - sub.Length);
-        }
-
-        public static string JoinToString<T>(this IEnumerable<T> enumerable, string separator)
-        {
-            return string.Join(separator, enumerable);
+            // Otherwise - return value
+            return value;
         }
     }
 }

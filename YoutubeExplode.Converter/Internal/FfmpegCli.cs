@@ -73,42 +73,49 @@ namespace YoutubeExplode.Converter.Internal
 		}
 	}
 
-	internal partial class FfmpegCli
-	{
-		private class FfmpegProgressRouter
-		{
-			private readonly IProgress<double> _output;
+    internal partial class FfmpegCli
+    {
+        private class FfmpegProgressRouter
+        {
+            private readonly IProgress<double>? _output;
 
 			private TimeSpan _totalDuration = TimeSpan.Zero;
 
-			public FfmpegProgressRouter(IProgress<double> output)
-			{
-				_output = output;
-			}
+            public FfmpegProgressRouter(IProgress<double>? output)
+            {
+                _output = output;
+            }
 
-			public void ProcessLine(string line)
-			{
-				// Parse total duration if it's not known yet
-				if (_totalDuration == TimeSpan.Zero)
-				{
-					var totalDurationRaw = Regex.Match(line, @"Duration:\s(\d\d:\d\d:\d\d.\d\d)").Groups[1].Value;
-					if (totalDurationRaw.IsNotBlank())
-						_totalDuration = TimeSpan.ParseExact(totalDurationRaw, "c", CultureInfo.InvariantCulture);
-				}
-				// Parse current duration and report progress if total duration is known
-				else
-				{
-					var currentDurationRaw = Regex.Match(line, @"time=(\d\d:\d\d:\d\d.\d\d)").Groups[1].Value;
-					if (currentDurationRaw.IsNotBlank())
-					{
-						var currentDuration =
-							TimeSpan.ParseExact(currentDurationRaw, "c", CultureInfo.InvariantCulture);
+            public void ProcessLine(string line)
+            {
+                if (_output is null)
+                    return;
 
-						// Report progress
-						_output?.Report(currentDuration.TotalMilliseconds / _totalDuration.TotalMilliseconds);
-					}
-				}
-			}
-		}
-	}
+                // Parse total duration if it's not known yet
+                if (_totalDuration == TimeSpan.Zero)
+                {
+                    var totalDurationRaw = Regex.Match(line, @"Duration:\s(\d\d:\d\d:\d\d.\d\d)").Groups[1].Value;
+                    if (!string.IsNullOrWhiteSpace(totalDurationRaw))
+                        _totalDuration = TimeSpan.ParseExact(totalDurationRaw, "c", CultureInfo.InvariantCulture);
+                }
+                // Parse current duration and report progress if total duration is known
+                else
+                {
+                    var currentDurationRaw = Regex.Match(line, @"time=(\d\d:\d\d:\d\d.\d\d)").Groups[1].Value;
+                    if (!string.IsNullOrWhiteSpace(currentDurationRaw))
+                    {
+                        var currentDuration =
+                            TimeSpan.ParseExact(currentDurationRaw, "c", CultureInfo.InvariantCulture);
+
+                        // Calculate progress
+                        var progress =
+                            (currentDuration.TotalMilliseconds / _totalDuration.TotalMilliseconds).Clamp(0, 1);
+
+                        // Report progress
+                        _output.Report(progress);
+                    }
+                }
+            }
+        }
+    }
 }

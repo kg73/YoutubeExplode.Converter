@@ -1,16 +1,16 @@
 # YoutubeExplode.Converter
 
-[![Build](https://img.shields.io/appveyor/ci/Tyrrrz/YoutubeExplode-Converter/master.svg)](https://ci.appveyor.com/project/Tyrrrz/YoutubeExplode-Converter)
-[![Tests](https://img.shields.io/appveyor/tests/Tyrrrz/YoutubeExplode-Converter/master.svg)](https://ci.appveyor.com/project/Tyrrrz/YoutubeExplode-Converter)
-[![NuGet](https://img.shields.io/nuget/v/YoutubeExplode.Converter.svg)](https://nuget.org/packages/YoutubeExplode.Converter)
-[![NuGet](https://img.shields.io/nuget/dt/YoutubeExplode.Converter.svg)](https://nuget.org/packages/YoutubeExplode.Converter)
+[![Build](https://github.com/Tyrrrz/YoutubeExplode.Converter/workflows/CI/badge.svg?branch=master)](https://github.com/Tyrrrz/YoutubeExplode.Converter/actions)
+[![Coverage](https://codecov.io/gh/Tyrrrz/YoutubeExplode.Converter/branch/master/graph/badge.svg)](https://codecov.io/gh/Tyrrrz/YoutubeExplode.Converter)
+[![Version](https://img.shields.io/nuget/v/YoutubeExplode.Converter.svg)](https://nuget.org/packages/YoutubeExplode.Converter)
+[![Downloads](https://img.shields.io/nuget/dt/YoutubeExplode.Converter.svg)](https://nuget.org/packages/YoutubeExplode.Converter)
+[![Donate](https://img.shields.io/badge/donate-$$$-purple.svg)](https://tyrrrz.me/donate)
 
 YoutubeExplode.Converter is a helper library for [YoutubeExplode](https://github.com/Tyrrrz/YoutubeExplode) that provides an interface to download videos directly, without having to multiplex or convert streams yourself.
 
 ## Download
 
-- [NuGet](https://nuget.org/packages/YoutubeExplode.Converter): `Install-Package YoutubeExplode.Converter`
-- [Continuous integration](https://ci.appveyor.com/project/Tyrrrz/YoutubeExplode-Converter)
+- [NuGet](https://nuget.org/packages/YoutubeExplode.Converter): `dotnet add package YoutubeExplode.Converter`
 
 ## Features
 
@@ -19,7 +19,7 @@ YoutubeExplode.Converter is a helper library for [YoutubeExplode](https://github
 - Select specific streams to download
 - Progress reporting and cancellation
 - Fully asynchronous API
-- Targets .NET Framework 4.5+ and .NET Standard 2.0+
+- Targets .NET Framework 4.5+ and .NET Standard 2.0+ (only Desktop OS)
 
 ## Usage
 
@@ -65,9 +65,3 @@ var mediaStreamInfos = new MediaStreamInfo[] { audioStreamInfo, videoStreamInfo 
 // Download and process them into one file
 await converter.DownloadAndProcessMediaStreamsAsync(mediaStreamInfos, "video.mp4", "mp4");
 ```
-
-## Libraries used
-
-- [YoutubeExplode](https://github.com/Tyrrrz/YoutubeExplode)
-- [CliWrap](https://github.com/Tyrrrz/CliWrap)
-- [NUnit](https://github.com/nunit/nunit)
