@@ -62,14 +62,12 @@ namespace YoutubeExplode.Converter.Internal
 			var progressRouter = new FfmpegProgressRouter(progress);
 
 			// Run CLI
-			return new Cli(_ffmpegFilePath)
-				.SetWorkingDirectory(Directory.GetCurrentDirectory())
-				.SetArguments(args.JoinToString(" "))
-				.SetStandardErrorCallback(progressRouter.ProcessLine) // handle stderr to parse and route progress
-				.SetCancellationToken(cancellationToken)
-				.EnableExitCodeValidation()
-				.EnableStandardErrorValidation(false) // disable stderr validation because ffmpeg writes progress there
-				.ExecuteAsync();
+			return Cli.Wrap(_ffmpegFilePath)
+				.WithWorkingDirectory(Directory.GetCurrentDirectory())
+				.WithArguments(args.JoinToString(" "))
+				.WithStandardErrorPipe(PipeTarget.ToDelegate((line) => progressRouter.ProcessLine(line))) // handle stderr to parse and route progress
+				.WithValidation(CommandResultValidation.None) // disable stderr validation because ffmpeg writes progress there
+				.ExecuteAsync(cancellationToken);
 		}
 	}
 
